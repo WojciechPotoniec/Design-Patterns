@@ -7,18 +7,29 @@ class BookingInstance
 {
     public static function getInstance($type)
     {
-        switch ($type) {
-            case 'camera':
-                return new BookingCamera();
-                break;
+        // Metodo 1 con lo switch case che esegue un confronto non rigoroso ==
+        // switch ($type) {
+        //     case 'camera':
+        //         return new BookingCamera();
+        //         break;
 
-            case 'appartamento':
-                return new BookingAppartamento();
-                break;
+        //     case 'appartamento':
+        //         return new BookingAppartamento();
+        //         break;
 
-            case 'barca':
-                return new BookingBarca();
-                break;
-        }
+        //     case 'barca':
+        //         return new BookingBarca();
+        //         break;
+        // }
+
+        // Metodo 2 con l'espressione match che esegue un confronto rigoroso === e restituisce una variabile
+        $booking = match ($type) {
+            'camera' => new BookingCamera(),
+            'appartamento' => new BookingAppartamento(),
+            'barca' => new BookingBarca(),
+            default => null
+        };
+
+        return $booking;
     }
 }
